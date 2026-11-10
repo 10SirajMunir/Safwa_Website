@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+/* Brand tokens (docs/brand/BRAND_GUIDELINES.md). Change colours here only. */
+@theme {
+  --color-maroon-950: #2a0006;
+  --color-maroon-900: #3a0008;
+  --color-maroon-800: #51010c;
+  --color-maroon-700: #6e0f1c;
+  --color-maroon-600: #8a2232;
+  --color-gold-200: #f6e9c6;
+  --color-gold-300: #f1dda8;
+  --color-gold-400: #e2be76;
+  --color-gold-500: #c9a04f;
+  --color-gold-700: #7f5c1c;
+  --color-ivory: #faf6ef;
+  --color-sand: #f2eadd;
+  --color-line: #e3d7c4;
+  --color-ink: #231416;
+  --color-muted: #5e4b4e;
+  --color-whatsapp: #107a40;
+  --color-whatsapp-dark: #0b5e31;
+  --color-danger: #a3172b;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-source-sans), "Source Sans 3", system-ui, sans-serif;
+
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (min-width: 64rem) {
+    body {
+      font-size: 1.125rem;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: lining-nums;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-gold-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-gold-300);
+    color: var(--color-maroon-900);
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 48rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Small-caps label above headings, echoing the letter-spaced tagline in the logo. */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.font-display {
+  font-variant-numeric: lining-nums;
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Long-form article typography. */
+@utility prose-article {
+  & > * + * {
+    margin-top: 1.1em;
+  }
+  & h2 {
+    margin-top: 2em;
+    font-size: 1.75rem;
+    color: var(--color-maroon-800);
+  }
+  & ul {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  & li + li {
+    margin-top: 0.5em;
+  }
+  & li::marker {
+    color: var(--color-gold-500);
+  }
+}
+
+/* A fabric page's own WhatsApp button replaces the general one (FR-06). */
+body:has([data-whatsapp="fabric"]) [data-whatsapp="general"] {
+  display: none;
+}
+
+/* Native disclosure: hide the default marker, we draw our own. */
+summary {
+  list-style: none;
+  cursor: pointer;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
